@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="filedev_varnetsolutions_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MediaTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="application_code" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tenant_code" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="media_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="mime_type" Type="varchar" MaxLength="300" />
+          <Property Name="file_size" Type="int" Nullable="false" />
+          <Property Name="file_path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="created_at" Type="datetime" Nullable="false" />
+          <Property Name="used_for" Type="int" />
+          <Property Name="file_url" Type="nvarchar(max)" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="ServiceCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="file_nm" Type="nvarchar(max)" />
+        </EntityType>
+        <Function Name="sp_get_filepaths_by_media_ids" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MediaIds" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="filedev_varnetsolutions_dbModelStoreContainer">
+          <EntitySet Name="MediaTable" EntityType="Self.MediaTable" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="filedev_varnetsolutions_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="filedev_varnetsolutions_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MediaTables" EntityType="filedev_varnetsolutions_dbModel.MediaTable" />
+          <FunctionImport Name="sp_get_filepaths_by_media_ids" ReturnType="Collection(filedev_varnetsolutions_dbModel.sp_get_filepaths_by_media_ids_Result)">
+            <Parameter Name="MediaIds" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="MediaTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="application_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tenant_code" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="media_id" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="mime_type" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="file_size" Type="Int32" Nullable="false" />
+          <Property Name="file_path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="used_for" Type="Int32" />
+          <Property Name="file_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="ServiceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="file_nm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="sp_get_filepaths_by_media_ids_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="media_id" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="mime_type" Nullable="true" MaxLength="300" />
+          <Property Type="Int32" Name="file_size" Nullable="false" />
+          <Property Type="String" Name="file_path" Nullable="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="false" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="filedev_varnetsolutions_dbModelStoreContainer" CdmEntityContainer="filedev_varnetsolutions_dbEntities">
+        <EntitySetMapping Name="MediaTables">
+            <EntityTypeMapping TypeName="filedev_varnetsolutions_dbModel.MediaTable">
+              <MappingFragment StoreEntitySet="MediaTable">
+                <ScalarProperty Name="file_nm" ColumnName="file_nm" />
+                <ScalarProperty Name="ServiceCode" ColumnName="ServiceCode" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="file_url" ColumnName="file_url" />
+                <ScalarProperty Name="used_for" ColumnName="used_for" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="file_size" ColumnName="file_size" />
+                <ScalarProperty Name="mime_type" ColumnName="mime_type" />
+                <ScalarProperty Name="media_id" ColumnName="media_id" />
+                <ScalarProperty Name="tenant_code" ColumnName="tenant_code" />
+                <ScalarProperty Name="application_code" ColumnName="application_code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_get_filepaths_by_media_ids" FunctionName="filedev_varnetsolutions_dbModel.Store.sp_get_filepaths_by_media_ids">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="filedev_varnetsolutions_dbModel.sp_get_filepaths_by_media_ids_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="media_id" ColumnName="media_id" />
+                <ScalarProperty Name="mime_type" ColumnName="mime_type" />
+                <ScalarProperty Name="file_size" ColumnName="file_size" />
+                <ScalarProperty Name="file_path" ColumnName="file_path" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
