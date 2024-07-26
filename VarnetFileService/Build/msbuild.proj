@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+    <Platform Condition="'$(Platform)' == ''">AnyCPU</Platform>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <Target Name="Build">
+    <MSBuild Projects="YourProject.csproj" Properties="Configuration=$(Configuration)" />
+  </Target>
+  <Target Name="CreateNuGetPackage" DependsOnTargets="Build">
+    <Exec Command="nuget pack VarnetFileServicePackage.nuspec -OutputDirectory $(OutputPath) -Version 1.0.0" />
+  </Target>
+</Project>
+

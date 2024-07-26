@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>VarnetFileService</id>
+		<version>1.0.0</version>
+		<authors>Your Name</authors>
+		<description>Your package description here</description>
+	</metadata>
+	<files>
+		<file src="C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  target="lib\net5.0\" />
+		<!-- Add other files if needed -->
+	</files>
+</package>
